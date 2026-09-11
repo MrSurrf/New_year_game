@@ -73,14 +73,42 @@ def write_png(path, width, height, pixel_fn):
         f.write(png)
 
 
+def exists_any(base):
+    return any(os.path.exists(base + ext) for ext in (".wav", ".ogg", ".mp3"))
+
+
+def make(path, samples):
+    # не затираем и не дублируем файлы, которые пользователь уже заменил своими
+    if exists_any(os.path.splitext(path)[0]):
+        print("пропуск (уже есть свой файл):", os.path.relpath(path, ROOT))
+        return
+    write_wav(path, samples)
+    print("создано:", os.path.relpath(path, ROOT))
+
+
 def main():
     snd = os.path.join(ROOT, "sound")
-    write_wav(os.path.join(snd, "ui", "click.wav"), tone(1200, 0.06, 0.5))
-    write_wav(os.path.join(snd, "ui", "switch.wav"),
-              concat(tone(600, 0.08), tone(900, 0.10)))
-    write_wav(os.path.join(snd, "abilities", "ability.wav"),
-              concat(tone(523, 0.10), tone(659, 0.10), tone(784, 0.18)))
-    write_wav(os.path.join(snd, "music", "background_loop.wav"), make_music())
+    make(os.path.join(snd, "ui", "click.wav"), tone(1200, 0.06, 0.5))
+    make(os.path.join(snd, "ui", "switch.wav"),
+         concat(tone(600, 0.08), tone(900, 0.10)))
+    make(os.path.join(snd, "abilities", "ability.wav"),
+         concat(tone(523, 0.10), tone(659, 0.10), tone(784, 0.18)))
+    make(os.path.join(snd, "music", "background_loop.wav"), make_music())
+    make(os.path.join(snd, "game_start", "game_start.wav"),
+         concat(tone(392, 0.12), tone(523, 0.12), tone(659, 0.25)))
+    make(os.path.join(snd, "character_select", "character_select.wav"),
+         tone(800, 0.09, 0.45))
+    make(os.path.join(snd, "category_select", "category_select.wav"),
+         concat(tone(700, 0.08), tone(1000, 0.12)))
+    make(os.path.join(snd, "steal", "steal.wav"),
+         concat(tone(300, 0.12, 0.5), tone(220, 0.20, 0.5)))
+    make(os.path.join(snd, "timer", "timer_tick.wav"), tone(1000, 0.05, 0.35))
+    make(os.path.join(snd, "timer", "timeout.wav"),
+         concat(tone(500, 0.15, 0.5), tone(350, 0.15, 0.5), tone(220, 0.3, 0.5)))
+    make(os.path.join(snd, "round_end", "round_end.wav"),
+         concat(tone(523, 0.12), tone(392, 0.12), tone(523, 0.22)))
+    make(os.path.join(snd, "game_end", "game_end.wav"),
+         concat(tone(523, 0.15), tone(659, 0.15), tone(784, 0.15), tone(1047, 0.45)))
 
     def bg_pixel(x, y):
         t = y / 719

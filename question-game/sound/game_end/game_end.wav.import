@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://b36uwxshn45bs"
-path="res://.godot/imported/switch.wav-574c3f5c6bbc05b98dda248dc00614bf.sample"
+uid="uid://w06fusycjibf"
+path="res://.godot/imported/game_end.wav-2f46e71ab9c0a12cc312c2251569bb39.sample"
 
 [deps]
 
-source_file="res://sound/ui/switch.wav"
-dest_files=["res://.godot/imported/switch.wav-574c3f5c6bbc05b98dda248dc00614bf.sample"]
+source_file="res://sound/game_end/game_end.wav"
+dest_files=["res://.godot/imported/game_end.wav-2f46e71ab9c0a12cc312c2251569bb39.sample"]
 
 [params]
 

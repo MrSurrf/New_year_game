@@ -6,6 +6,7 @@ extends Control
 
 
 func _ready() -> void:
+	SoundManager.play_game_end()
 	var s1: int = GameState.scores["team1"]
 	var s2: int = GameState.scores["team2"]
 	if s1 > s2:

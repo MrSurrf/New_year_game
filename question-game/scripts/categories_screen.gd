@@ -34,5 +34,6 @@ func _build_tiles() -> void:
 
 
 func _on_tile_pressed(cat_id: String) -> void:
+	SoundManager.play_category_select()
 	GameState.pending_category = cat_id
 	get_tree().get_first_node_in_group("main").show_screen("question")

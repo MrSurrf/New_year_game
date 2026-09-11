@@ -20,6 +20,7 @@ var timer_running := false
 var steal_phase := false
 var option_buttons: Array = []
 var selected_option := -1
+var last_tick_second := -1
 
 
 func _ready() -> void:
@@ -50,6 +51,10 @@ func _process(delta: float) -> void:
 		_on_timeout()
 	else:
 		_update_timer_display()
+		var sec := int(ceil(time_left))
+		if sec <= 5 and sec != last_tick_second:
+			last_tick_second = sec
+			SoundManager.play_timer_tick()
 
 
 func _next_question() -> void:
@@ -98,6 +103,7 @@ func _start_timer(seconds: float) -> void:
 	time_left = seconds
 	timer_bar.max_value = seconds
 	timer_running = true
+	last_tick_second = -1
 	_update_timer_display()
 
 
@@ -113,6 +119,7 @@ func _set_verdicts_enabled(enabled: bool) -> void:
 
 
 func _on_timeout() -> void:
+	SoundManager.play_timeout()
 	if steal_phase:
 		GameState.mark_question(current["id"], "unanswered")
 		_next_question()
@@ -123,6 +130,7 @@ func _on_timeout() -> void:
 func _on_correct_pressed() -> void:
 	timer_running = false
 	_set_verdicts_enabled(false)
+	SoundManager.play_correct()
 	if steal_phase:
 		GameState.award(GameState.challenging_team, DataLoader.get_config_int("points_steal"))
 	else:
@@ -132,6 +140,7 @@ func _on_correct_pressed() -> void:
 
 
 func _on_wrong_pressed() -> void:
+	SoundManager.play_wrong()
 	if steal_phase:
 		timer_running = false
 		GameState.mark_question(current["id"], "unanswered")
@@ -148,6 +157,7 @@ func _on_no_answer_pressed() -> void:
 
 func _start_steal() -> void:
 	steal_phase = true
+	SoundManager.play_steal()
 	phase_label.text = "Перехват! Отвечает: %s" % GameState.team_label(GameState.challenging_team)
 	no_answer_button.visible = false
 	correct_button.text = "Верно (+%d вызывающей)" % DataLoader.get_config_int("points_steal")
@@ -176,4 +186,5 @@ func _end_round() -> void:
 	if GameState.is_game_over():
 		main.show_screen("result")
 	else:
+		SoundManager.play_round_end()
 		main.show_screen("roster")

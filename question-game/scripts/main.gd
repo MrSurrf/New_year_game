@@ -18,6 +18,7 @@ func _ready() -> void:
 
 
 func _on_start_pressed() -> void:
+	SoundManager.play_game_start()
 	GameState.reset_game()
 	show_screen("roster")
 

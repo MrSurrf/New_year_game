@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://7a4g3kd0quy8"]
 
-[ext_resource type="Script" path="res://scripts/roster_screen.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/backgrounds/main_background.png" id="2"]
+[ext_resource type="Script" uid="uid://bsxdspao7tbny" path="res://scripts/roster_screen.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://q3s2icaa2j1f" path="res://assets/backgrounds/main_background.png" id="2"]
 
-[node name="RosterScreen" type="Control"]
+[node name="RosterScreen" type="Control" unique_id=838333345]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1306043394]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=1752833271]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,33 +36,69 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
-[node name="InfoLabel" type="Label" parent="VBox"]
+[node name="InfoLabel" type="Label" parent="VBox" unique_id=928460582]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Выберите персонажа"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Grid" type="GridContainer" parent="VBox"]
+[node name="MainHBox" type="HBoxContainer" parent="VBox" unique_id=654380073]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 3
+theme_override_constants/separation = 24
 
-[node name="BottomBar" type="HBoxContainer" parent="VBox"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="SelectedLabel" type="Label" parent="VBox/BottomBar"]
+[node name="LeftBox" type="VBoxContainer" parent="VBox/MainHBox" unique_id=328505862]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Персонаж не выбран"
-vertical_alignment = 1
+alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="VBox/BottomBar"]
+[node name="Grid" type="GridContainer" parent="VBox/MainHBox/LeftBox" unique_id=1576505476]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="RightPanel" type="PanelContainer" parent="VBox/MainHBox" unique_id=939462693]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="RightVBox" type="VBoxContainer" parent="VBox/MainHBox/RightPanel" unique_id=1394467899]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ScoreTitle" type="Label" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=741804656]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Счёт"
+horizontal_alignment = 1
+
+[node name="Score1Label" type="Label" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=34573372]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
+text = "Команда 1: 0"
+horizontal_alignment = 1
+
+[node name="Score2Label" type="Label" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=1729154326]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Команда 2: 0"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=575822788]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectedLabel" type="Label" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=1305681210]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Персонаж не выбран"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="VBox/MainHBox/RightPanel/RightVBox" unique_id=1914546265]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
 disabled = true
-text = "Подтвердить выбор"
+text = "Начать"
