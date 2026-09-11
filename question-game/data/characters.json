@@ -1,0 +1,82 @@
+[
+  {
+    "id": "mage",
+    "name": "Маг",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
+  },
+  {
+    "id": "sage",
+    "name": "Мудрец",
+    "ability": {
+      "name": "Мудрая подсказка",
+      "description": "Показывает подсказку к текущему вопросу",
+      "effects": [
+        { "type": "show_hint" }
+      ]
+    }
+  },
+  {
+    "id": "chrono",
+    "name": "Хрономант",
+    "ability": {
+      "name": "Петля времени",
+      "description": "+15 секунд к таймеру текущего вопроса",
+      "effects": [
+        { "type": "extra_time", "value": 15 }
+      ]
+    }
+  },
+  {
+    "id": "gambler",
+    "name": "Счастливчик",
+    "ability": {
+      "name": "Удвоение",
+      "description": "Очки за текущий вопрос удваиваются",
+      "effects": [
+        { "type": "double_points" }
+      ]
+    }
+  },
+  {
+    "id": "alchemist",
+    "name": "Алхимик",
+    "ability": {
+      "name": "Философский камень",
+      "description": "+3 очка своей команде",
+      "effects": [
+        { "type": "add_points", "value": 3 }
+      ]
+    }
+  },
+  {
+    "id": "mage",
+    "name": "Умник",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
+  },
+  {
+    "id": "jester",
+    "name": "Шут",
+    "ability": {
+      "name": "Тяжёлая шутка",
+      "description": "-2 очка своей команде, но +10 секунд к таймеру",
+      "effects": [
+        { "type": "add_points", "value": -2 },
+        { "type": "extra_time", "value": 10 }
+      ]
+    }
+  }
+]
