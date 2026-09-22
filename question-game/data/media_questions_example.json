@@ -1,0 +1,34 @@
+[
+  {
+    "id": "films",
+    "name": "Кино",
+    "questions": [
+      {
+        "id": "f1",
+        "type": "open",
+        "text": "Угадайте фильм по кадру",
+        "answer": "Титаник",
+        "hint": "Фильм Джеймса Кэмерона 1997 года",
+        "media": { "type": "image", "path": "res://assets/media/films/titanic.png" },
+        "time": 45
+      },
+      {
+        "id": "f2",
+        "type": "open",
+        "text": "Угадайте фильм по саундтреку",
+        "answer": "Пираты Карибского моря",
+        "hint": "Музыка Ханса Циммера",
+        "media": { "type": "audio", "path": "res://assets/media/soundtracks/pirates.ogg" },
+        "time": 45
+      },
+      {
+        "id": "f3",
+        "type": "choice",
+        "text": "Из какого фильма этот кадр?",
+        "options": ["Матрица", "Начало", "Интерстеллар", "Бегущий по лезвию"],
+        "answer": "Матрица",
+        "media": { "type": "image", "path": "res://assets/media/films/matrix.png" }
+      }
+    ]
+  }
+]

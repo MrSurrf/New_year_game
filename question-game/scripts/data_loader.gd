@@ -53,7 +53,7 @@ func _validate() -> void:
 			continue
 		if not ch["ability"].has("effects") or typeof(ch["ability"]["effects"]) != TYPE_ARRAY:
 			push_error("У персонажа '%s' способность без массива effects" % ch["id"])
-		for frame in ["frame1.png", "frame2.png"]:
+		for frame in ["frame1.png"]:
 			var path := "res://assets/characters/%s/%s" % [ch["id"], frame]
 			if not FileAccess.file_exists(path):
 				push_error("Не найден кадр анимации: " + path)
@@ -74,6 +74,16 @@ func _validate_question(cat_id: String, q: Variant) -> void:
 			push_error("Вопрос '%s' типа choice без options" % q.get("id"))
 		elif q.get("answer") not in options:
 			push_error("Вопрос '%s': answer отсутствует среди options" % q.get("id"))
+	if q.has("media"):
+		var media: Variant = q["media"]
+		if typeof(media) != TYPE_DICTIONARY \
+				or media.get("type") not in ["image", "audio"] \
+				or not media.has("path"):
+			push_error("Вопрос '%s': некорректное поле media (нужны type: image|audio и path)" % q.get("id"))
+		elif not FileAccess.file_exists(media["path"]):
+			push_error("Вопрос '%s': медиафайл не найден: %s" % [q.get("id"), media["path"]])
+	if q.has("time") and float(q["time"]) <= 0.0:
+		push_error("Вопрос '%s': time должен быть положительным числом" % q.get("id"))
 
 
 func get_category(cat_id: String) -> Dictionary:

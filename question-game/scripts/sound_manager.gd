@@ -20,14 +20,17 @@ var _music: AudioStreamPlayer
 var _sfx: Array[AudioStreamPlayer] = []
 var _sfx_index := 0
 var _ability_sounds: Array[String] = []
+var _media: AudioStreamPlayer
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_music = _make_player(_find_stream(MUSIC_BASE), -12.0)
 	_music.finished.connect(_music.play)
 	_music.play()
 	for i in 6:
 		_sfx.append(_make_player("", 0.0))
+	_media = _make_player("", 0.0)
 	_ability_sounds = _scan_audio_dir(ABILITIES_DIR)
 	get_tree().node_added.connect(_on_node_added)
 
@@ -59,6 +62,7 @@ func _scan_audio_dir(dir_path: String) -> Array[String]:
 
 func _make_player(stream_path: String, volume_db: float) -> AudioStreamPlayer:
 	var player := AudioStreamPlayer.new()
+	player.process_mode = Node.PROCESS_MODE_ALWAYS
 	if not stream_path.is_empty():
 		player.stream = load(stream_path)
 	player.volume_db = volume_db
@@ -128,6 +132,18 @@ func play_round_end() -> void:
 
 func play_game_end() -> void:
 	_play(GAME_END_BASE)
+
+
+func play_media(path: String) -> void:
+	if not ResourceLoader.exists(path):
+		push_warning("SoundManager: медиафайл не найден: " + path)
+		return
+	_media.stream = load(path)
+	_media.play()
+
+
+func stop_media() -> void:
+	_media.stop()
 
 
 func _on_node_added(node: Node) -> void:

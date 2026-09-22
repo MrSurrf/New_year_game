@@ -56,8 +56,32 @@
     }
   },
   {
-    "id": "mage",
+    "id": "image",
     "name": "Умник",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
+  },
+  {
+    "id": "Kate",
+    "name": "Катя",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
+  },
+  {
+    "id": "Nat",
+    "name": "Наташа",
     "ability": {
       "name": "Рискованная магия",
       "description": "+5 очков своей команде, но команда пропускает следующий раунд",

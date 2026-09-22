@@ -1,5 +1,7 @@
 extends Control
 
+const ABILITY_OVERLAY := preload("res://scenes/ability_overlay.tscn")
+
 @onready var round_label: Label = $VBox/TopBar/RoundLabel
 @onready var phase_label: Label = $VBox/PhaseLabel
 @onready var question_text: Label = $VBox/QuestionText
@@ -21,6 +23,10 @@ var steal_phase := false
 var option_buttons: Array = []
 var selected_option := -1
 var last_tick_second := -1
+var media_box: VBoxContainer
+var media_image: TextureRect
+var media_replay: Button
+var media_audio_path := ""
 
 
 func _ready() -> void:
@@ -36,8 +42,56 @@ func _ready() -> void:
 	wrong_button.pressed.connect(_on_wrong_pressed)
 	no_answer_button.pressed.connect(_on_no_answer_pressed)
 	ability_button.pressed.connect(_on_ability_pressed)
+	_build_media_box()
 	queue = GameState.pick_questions(GameState.pending_category)
 	_next_question()
+
+
+func _build_media_box() -> void:
+	media_box = VBoxContainer.new()
+	media_box.visible = false
+	var vbox: VBoxContainer = options_box.get_parent()
+	vbox.add_child(media_box)
+	vbox.move_child(media_box, options_box.get_index())
+
+	media_image = TextureRect.new()
+	media_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	media_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	media_image.custom_minimum_size = Vector2(0, 320)
+	media_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	media_box.add_child(media_image)
+
+	media_replay = Button.new()
+	media_replay.text = "Прослушать ещё раз"
+	media_replay.add_theme_font_size_override("font_size", 20)
+	media_replay.pressed.connect(func() -> void: SoundManager.play_media(media_audio_path))
+	media_box.add_child(media_replay)
+
+
+func _show_media(media: Dictionary) -> void:
+	SoundManager.stop_media()
+	media_box.visible = false
+	media_image.visible = false
+	media_replay.visible = false
+	media_audio_path = ""
+	if media.is_empty():
+		return
+	var path: String = media.get("path", "")
+	if not ResourceLoader.exists(path):
+		push_error("Медиафайл не найден: " + path)
+		return
+	match media.get("type", ""):
+		"image":
+			media_image.texture = load(path)
+			media_image.visible = true
+			media_box.visible = true
+		"audio":
+			media_audio_path = path
+			media_replay.visible = true
+			media_box.visible = true
+			SoundManager.play_media(path)
+		_:
+			push_error("Неизвестный тип медиа: " + str(media.get("type")))
 
 
 func _process(delta: float) -> void:
@@ -73,7 +127,9 @@ func _next_question() -> void:
 	correct_button.text = "Верно (+%d отвечающей)" % DataLoader.get_config_int("points_correct")
 	_set_verdicts_enabled(true)
 	_build_options()
-	_start_timer(float(DataLoader.get_config_int("answer_time_sec")))
+	_show_media(current.get("media", {}))
+	var question_time := float(current.get("time", DataLoader.get_config_int("answer_time_sec")))
+	_start_timer(question_time)
 
 
 func _build_options() -> void:
@@ -168,6 +224,9 @@ func _start_steal() -> void:
 func _on_ability_pressed() -> void:
 	ability_button.disabled = true
 	SoundManager.play_ability()
+	var overlay := ABILITY_OVERLAY.instantiate()
+	add_child(overlay)
+	overlay.show_ability(GameState.current_character)
 	for action in GameState.use_ability():
 		if action is String and action == "show_hint":
 			hint_label.text = "Подсказка: %s" % current.get("hint", "подсказки нет")
