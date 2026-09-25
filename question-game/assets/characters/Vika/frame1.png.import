@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bg0mnutl8bnk0"
-path="res://.godot/imported/ezgif-frame-040.png-78f0e601746009016226e1bcae3ceb16.ctex"
+uid="uid://dweagmck3b83p"
+path="res://.godot/imported/frame1.png-126fabfd9d08c84c96bc29dad2d1a99e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/back_roster/ezgif-frame-040.png"
-dest_files=["res://.godot/imported/ezgif-frame-040.png-78f0e601746009016226e1bcae3ceb16.ctex"]
+source_file="res://assets/characters/Vika/frame1.png"
+dest_files=["res://.godot/imported/frame1.png-126fabfd9d08c84c96bc29dad2d1a99e.ctex"]
 
 [params]
 

@@ -9,7 +9,7 @@ extends Control
 @onready var score2_label: Label = $VBox/MainHBox/RightPanel/RightVBox/Score2Label
 
 const HAT_TEXTURE := preload("res://assets/hat.png")
-const FRAME_SIZE := 170.0
+const FRAME_SIZE := 200.0
 const HAT_SIZE := Vector2(145, 148)
 const HAT_REST_POS := Vector2(0, -53)
 const HAT_DROP_HEIGHT := 60.0
@@ -45,8 +45,7 @@ func _update_scores() -> void:
 func _build_cards() -> void:
 	for ch in DataLoader.characters:
 		var card := Button.new()
-		card.custom_minimum_size = Vector2(190, 190)
-
+		card.custom_minimum_size = Vector2(FRAME_SIZE,FRAME_SIZE)
 		var vb := VBoxContainer.new()
 		vb.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		vb.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -54,7 +53,7 @@ func _build_cards() -> void:
 		card.add_child(vb)
 
 		var holder := Control.new()
-		holder.custom_minimum_size = Vector2(FRAME_SIZE, FRAME_SIZE)
+		#holder.custom_minimum_size = Vector2(FRAME_SIZE, FRAME_SIZE)
 		holder.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		vb.add_child(holder)

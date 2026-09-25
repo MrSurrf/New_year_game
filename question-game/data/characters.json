@@ -102,5 +102,29 @@
         { "type": "extra_time", "value": 10 }
       ]
     }
+  },
+  {
+    "id": "Vika",
+    "name": "Вика",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
+  },
+  {
+    "id": "Polina",
+    "name": "Полина",
+    "ability": {
+      "name": "Рискованная магия",
+      "description": "+5 очков своей команде, но команда пропускает следующий раунд",
+      "effects": [
+        { "type": "add_points", "value": 5 },
+        { "type": "skip_next_round", "target": "own_team" }
+      ]
+    }
   }
 ]

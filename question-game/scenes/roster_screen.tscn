@@ -53,8 +53,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Выберите персонажа"
-horizontal_alignment = 1
-autowrap_mode = 2
+horizontal_alignment = 2
 
 [node name="MainHBox" type="HBoxContainer" parent="VBox" unique_id=654380073]
 layout_mode = 2
@@ -71,7 +70,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-columns = 3
+columns = 4
 
 [node name="RightPanel" type="PanelContainer" parent="VBox/MainHBox" unique_id=939462693]
 custom_minimum_size = Vector2(300, 0)

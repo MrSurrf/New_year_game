@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b508sdvk36b2u"
-path="res://.godot/imported/ezgif-frame-037.png-ca7a4feef2d80d4580605070ed785f18.ctex"
+uid="uid://dwwnbq78qc2v"
+path="res://.godot/imported/frame1.png-1223ee4fe427bde32c95dd08f9801d53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/back_roster/ezgif-frame-037.png"
-dest_files=["res://.godot/imported/ezgif-frame-037.png-ca7a4feef2d80d4580605070ed785f18.ctex"]
+source_file="res://assets/characters/Polina/frame1.png"
+dest_files=["res://.godot/imported/frame1.png-1223ee4fe427bde32c95dd08f9801d53.ctex"]
 
 [params]
 
